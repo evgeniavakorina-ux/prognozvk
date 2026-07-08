@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Экспресс-прогноз на июль — Евгения | Астролог</title>
+<meta name="description" content="Астрологический экспресс-прогноз на июль 2026 для всех знаков зодиака. Ретроградный Меркурий, новолуние и полнолуние — что важно знать именно тебе.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-primary: #f4f1ea;
+  --bg-secondary: #fffdf9;
+  --bg-card: #f2ece3;
+  --bg-card-hover: #efe8f6;
+  --border: rgba(46,36,66,0.08);
+  --border-accent: rgba(123,89,214,0.28);
+  --text-primary: #2b2436;
+  --text-secondary: #5d5470;
+  --text-muted: #8c83a0;
+  --accent-purple: #6f5fd0;
+  --accent-purple-dark: #5a48bd;
+  --accent-gold: #b08a47;
+  --accent-gold-light: #cda968;
+  --glow-purple: rgba(111,95,208,0.10);
+  --glow-gold: rgba(176,138,71,0.10);
+  --radius: 14px;
+  --radius-sm: 9px;
+  --radius-pill: 100px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Background glow — same as main site */
+body::before {
+  content: '';
+  position: fixed;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 600px;
+  background: radial-gradient(ellipse, rgba(123,95,225,0.10) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 6rem;
+}
+
+/* ── Header ── */
+.header { text-align: center; margin-bottom: 4rem; }
+
+.badge {
+  display: inline-block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  background: var(--glow-gold);
+  border: 0.5px solid rgba(200,169,110,0.2);
+  border-radius: var(--radius-pill);
+  padding: 6px 18px;
+  margin-bottom: 1.5rem;
+}
+
+.header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 7vw, 58px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+.header h1 em {
+  font-style: italic;
+  color: var(--accent-purple);
+}
+.header p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  font-weight: 300;
+  max-width: 400px;
+  margin: 0 auto;
+}
+.header .sub-note {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 300;
+  max-width: 420px;
+  margin: 0.75rem auto 0;
+  line-height: 1.6;
+}
+
+/* ── Signs grid ── */
+.signs-section { margin-bottom: 3rem; }
+
+.signs-label {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.signs-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+}
+@media (max-width: 480px) {
+  .signs-grid { grid-template-columns: repeat(4, 1fr); }
+  .page { padding: 2.5rem 1.25rem 5rem; }
+}
+
+.sign-btn {
+  background: var(--bg-secondary);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 6px 12px;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  color: var(--text-primary);
+}
+.sign-btn:hover {
+  background: var(--bg-card);
+  border-color: rgba(46,36,66,0.14);
+  transform: translateY(-1px);
+}
+.sign-btn.active {
+  background: var(--glow-purple);
+  border: 1.5px solid var(--border-accent);
+}
+.sign-sym { font-size: 22px; display: block; margin-bottom: 5px; line-height: 1; }
+.sign-nm  { font-size: 10px; color: var(--text-muted); letter-spacing: 0.04em; }
+.sign-btn.active .sign-nm  { color: var(--accent-purple); }
+
+/* ── Placeholder ── */
+.placeholder {
+  text-align: center;
+  padding: 5rem 1rem;
+  color: var(--text-muted);
+  font-size: 14px;
+  background: var(--bg-secondary);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+}
+.placeholder-icon { font-size: 48px; margin-bottom: 1rem; display: block; opacity: 0.6; }
+
+/* ── Forecast ── */
+.forecast { display: none; }
+.forecast.visible {
+  display: block;
+  animation: fadeUp 0.35s ease;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.forecast-head {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 1.5rem 1.75rem;
+  background: var(--bg-secondary);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+}
+.forecast-sym {
+  width: 60px; height: 60px;
+  font-size: 28px;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--glow-purple);
+  border: 0.5px solid var(--border-accent);
+  border-radius: 50%;
+}
+.forecast-meta h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 3px;
+}
+.forecast-meta p {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 300;
+  letter-spacing: 0.03em;
+}
+
+/* ── Content sections ── */
+.section {
+  background: var(--bg-secondary);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 8px;
+  transition: border-color 0.2s;
+}
+.section:hover { border-color: rgba(46,36,66,0.14); }
+
+.section-lbl {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+
+.section-txt {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+
+.section-txt + .section-txt { margin-top: 1rem; }
+
+.section-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+@media (max-width: 520px) { .section-grid { grid-template-columns: 1fr; } }
+
+/* ── Advice callout ── */
+.advice {
+  background: var(--glow-gold);
+  border: 0.5px solid rgba(200,169,110,0.35);
+  border-left: 2.5px solid var(--accent-gold);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 8px;
+}
+.advice-lbl {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin-bottom: 8px;
+  font-weight: 400;
+  display: block;
+}
+.advice-txt {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* ── CTA — same style as site's service cards ── */
+.cta {
+  margin-top: 2rem;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-secondary);
+  border: 0.5px solid var(--border-accent);
+  border-radius: var(--radius);
+  padding: 2rem 1.75rem;
+  text-align: center;
+}
+.cta::before {
+  content: '';
+  position: absolute;
+  top: -60px; left: 50%;
+  transform: translateX(-50%);
+  width: 320px; height: 180px;
+  background: radial-gradient(ellipse, rgba(123,95,225,0.13) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin-bottom: 1rem;
+  display: block;
+}
+.cta h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(22px, 4vw, 30px);
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
+}
+.cta p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 300;
+  max-width: 440px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.8;
+}
+.cta-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 38px;
+  font-weight: 500;
+  color: var(--accent-gold-light);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.01em;
+}
+.cta-price span {
+  font-size: 16px;
+  color: var(--text-muted);
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+}
+
+/* Button — same as main site CTA */
+.cta-btn {
+  display: inline-block;
+  background: transparent;
+  color: var(--text-primary);
+  text-decoration: none;
+  border: 0.5px solid rgba(111,95,208,0.40);
+  border-radius: var(--radius-pill);
+  padding: 14px 36px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.25s, border-color 0.25s, transform 0.15s;
+  position: relative;
+  z-index: 1;
+}
+.cta-btn:hover {
+  background: rgba(111,95,208,0.07);
+  border-color: rgba(111,95,208,0.60);
+  transform: translateY(-1px);
+}
+.cta-btn:active { transform: translateY(0); }
+
+.cta-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 300px;
+  margin: 0 auto;
+}
+.cta-btns .cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+  padding: 13px 24px;
+}
+.cta-btns .cta-btn svg { flex-shrink: 0; }
+
+.cta-note {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 0.75rem;
+  display: block;
+  font-weight: 300;
+  letter-spacing: 0.03em;
+}
+
+/* ── Divider ── */
+.divider {
+  width: 40px;
+  height: 0.5px;
+  background: var(--border-accent);
+  margin: 2.5rem auto;
+  opacity: 0.5;
+}
+
+/* ── Footer ── */
+.footer {
+  text-align: center;
+  padding-top: 3rem;
+  border-top: 0.5px solid var(--border);
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 300;
+  letter-spacing: 0.03em;
+}
+.footer a {
+  color: var(--accent-purple);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.footer a:hover { opacity: 0.7; }
+/* ── Light-theme depth: soft premium shadows ── */
+.sign-btn, .placeholder, .forecast-head, .section, .advice, .cta {
+  box-shadow: 0 1px 2px rgba(43,33,64,0.04), 0 8px 24px rgba(43,33,64,0.05);
+}
+.sign-btn:hover, .section:hover {
+  box-shadow: 0 2px 6px rgba(43,33,64,0.07), 0 12px 30px rgba(43,33,64,0.09);
+}
+.sign-btn.active {
+  box-shadow: 0 2px 12px rgba(111,95,208,0.16);
+}
+.forecast-sym {
+  box-shadow: 0 4px 14px rgba(111,95,208,0.14);
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="header">
+    <div class="badge">Астрология · Июль 2026</div>
+    <h1>Твой экспресс-прогноз<br>на <em>июль</em></h1>
+    <p>Выбери свой знак зодиака и посмотри, какие темы месяца могут выйти для тебя на первый план</p>
+    <p class="sub-note">Это общий прогноз по знаку Солнца. Он показывает фон месяца, но не учитывает твою личную натальную карту.</p>
+  </header>
+
+  <div class="signs-section">
+    <div class="signs-label">Выбери свой знак зодиака</div>
+    <div class="signs-grid" id="signsGrid"></div>
+  </div>
+
+  <div id="forecastArea">
+    <div class="placeholder">
+      <span class="placeholder-icon">✦</span>
+      <p>Выбери знак зодиака выше,<br>чтобы увидеть прогноз на июль</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <footer class="footer">
+    <p>Прогноз составлен астрологом Евгенией</p>
+  </footer>
+
+</div>
+
+<script>
+const FORECAST_MONTH = "июль";
+const FORECAST_MONTH_CAP = "Июль";
+const FORECAST_YEAR = "2026";
+
+const signs = [
+  {id:'aries',    name:'Овен',     symbol:'♈', dates:'21.03–20.04'},
+  {id:'taurus',   name:'Телец',    symbol:'♉', dates:'21.04–21.05'},
+  {id:'gemini',   name:'Близнецы', symbol:'♊', dates:'22.05–21.06'},
+  {id:'cancer',   name:'Рак',      symbol:'♋', dates:'22.06–22.07'},
+  {id:'leo',      name:'Лев',      symbol:'♌', dates:'23.07–23.08'},
+  {id:'virgo',    name:'Дева',     symbol:'♍', dates:'24.08–23.09'},
+  {id:'libra',    name:'Весы',     symbol:'♎', dates:'24.09–23.10'},
+  {id:'scorpio',  name:'Скорпион', symbol:'♏', dates:'24.10–22.11'},
+  {id:'sagittarius',name:'Стрелец',symbol:'♐', dates:'23.11–21.12'},
+  {id:'capricorn',name:'Козерог',  symbol:'♑', dates:'22.12–20.01'},
+  {id:'aquarius', name:'Водолей',  symbol:'♒', dates:'21.01–18.02'},
+  {id:'pisces',   name:'Рыбы',     symbol:'♓', dates:'19.02–20.03'}
+];
+
+const data = {
+  aries: {
+    paragraphs: [
+      `Для Овнов июль поднимает тему дома, семьи, внутренней опоры и ощущения безопасности. В первой половине месяца могут возвращаться старые семейные разговоры, бытовые вопросы, тема переезда, ремонта или накопленного раздражения. Важно не решать всё на эмоциях: до 23 июля лучше пересмотреть, что действительно даёт вам опору, а что вы просто продолжаете терпеть по привычке.`,
+      `Новолуние 14 июля может показать старый сценарий: где вы всё тащите на себе, молчите, копите напряжение, а потом хотите резко всё разрушить. Это не день для окончательных решений, а точка честности.`,
+      `После 22–23 июля станет больше энергии для творчества, любви, детей, личного бренда, удовольствия и проявленности. Захочется быть заметнее, ярче, свободнее.`,
+      `Полнолуние 29–30 июля подсветит тему друзей, команды, аудитории или планов на будущее. Кто действительно с вами на одной волне, а кто держит вас в старой версии себя?`,
+    ],
+    advice: `сначала верните себе внутреннюю опору, а уже потом выходите в активное проявление.`
+  },
+  taurus: {
+    paragraphs: [
+      `Для Тельцов июль поднимает тему общения, документов, обучения, переписок, поездок и договорённостей. В первой половине месяца могут возвращаться старые разговоры, незавершённые документы, вопросы с родственниками, соседями, обучением или дорогой.`,
+      `До 23 июля важно всё перепроверять: даты, оплаты, билеты, сообщения, договоры, адреса, обещания. Не все слова в июле стоит воспринимать как окончательную правду — часть информации может уточняться позже.`,
+      `Новолуние 14 июля помогает пересмотреть, как вы общаетесь: где молчите, где додумываете, где соглашаетесь из вежливости, а потом злитесь.`,
+      `После 22–23 июля фокус начнёт смещаться в дом, семью, личное пространство, быт и внутреннюю устойчивость. Захочется навести красоту вокруг себя, сделать дом местом силы, а не складом напряжения.`,
+      `Полнолуние 29–30 июля может дать осознание в карьере: туда ли вы идёте, тот ли статус строите, не слишком ли много делаете ради ожиданий других?`,
+    ],
+    advice: `говорите конкретнее, проверяйте детали и не принимайте чужие эмоции за обязательство срочно что-то решать.`
+  },
+  gemini: {
+    paragraphs: [
+      `Для Близнецов июль поднимает тему денег, самоценности, доходов, трат и личной опоры. Первая половина месяца может показать, где деньги утекают через хаос, тревогу, импульсивные покупки или неясную стратегию.`,
+      `До 23 июля лучше не делать резких финансовых решений из состояния "надо срочно всё исправить". Хорошо пересмотреть прайс, доходы, расходы, офферы, ценность своей работы и то, где вы сами себя обесцениваете.`,
+      `Новолуние 14 июля может вскрыть денежный сценарий: заработала — потратила — снова тревога; хочу больше — но боюсь назвать цену; много делаю — но не выстраиваю систему.`,
+      `После 22–23 июля станет больше энергии для общения, контента, обучения, поездок, переговоров и продвижения. Вам важно говорить, писать, заявлять о себе, но уже не из хаоса, а из ясной ценности.`,
+      `Полнолуние 29–30 июля может подсветить тему обучения, смыслов, путешествий или будущих планов: куда вы на самом деле хотите расширяться?`,
+    ],
+    advice: `не ищите быстрый денежный рывок — пересоберите систему, через которую деньги смогут приходить и задерживаться.`
+  },
+  cancer: {
+    paragraphs: [
+      `Для Раков июль — один из самых важных месяцев, потому что он поднимает тему личности, тела, образа, самоощущения и права быть собой. В первой половине месяца могут возвращаться старые мысли о себе, сомнения, обиды, воспоминания, вопросы внешности, самооценки и личных решений.`,
+      `До 23 июля не спешите резко менять всё: имидж, отношения, работу, позиционирование или жизненный курс. Сейчас важно не разрушить себя на эмоциях, а услышать, что внутри давно просит обновления.`,
+      `Новолуние 14 июля в вашем знаке помогает увидеть: какую версию себя вы больше не хотите тащить дальше? Где вы слишком долго подстраивались, терпели, боялись быть неудобной?`,
+      `После 22–23 июля фокус сместится в деньги, ценность, доход и материальную устойчивость. Появится больше энергии на то, чтобы выстроить опору не только внутри, но и в финансах.`,
+      `Полнолуние 29–30 июля может вскрыть глубокие темы: общие деньги, долги, зависимости, страх потери контроля, близость, доверие. Не принимайте решений в пике эмоций, но честно посмотрите, что больше не должно управлять вами.`,
+    ],
+    advice: `выбирайте не резкий побег из старого, а взрослое возвращение к себе.`
+  },
+  leo: {
+    paragraphs: [
+      `Для Львов первая часть июля может быть не самой внешне активной. Месяц начинается с темы отдыха, восстановления, завершений, подсознательных процессов, усталости и всего, что вы могли долго не замечать.`,
+      `До 23 июля важно беречь нервную систему, не перегружать себя и не требовать от себя постоянной яркости. Могут возвращаться старые страхи, сны, воспоминания, незакрытые эмоциональные истории или ощущение, что вы устали играть сильную роль.`,
+      `Новолуние 14 июля помогает увидеть, что пора завершить внутри: какую привычку, зависимость, тревогу, старую боль или внутренний диалог вы больше не хотите нести дальше?`,
+      `После 22–23 июля начнётся ваш период. Солнце переходит во Льва, и постепенно появится больше энергии, уверенности, желания быть заметными, красивыми, живыми и проявленными.`,
+      `Полнолуние 29–30 июля подсветит отношения, партнёрства, клиентов и важные договорённости. Может стать ясно, где есть равный союз, а где вы слишком много отдаёте или слишком много требуете.`,
+    ],
+    advice: `не заставляйте себя сиять через усталость — сначала восстановитесь, а потом выходите в проявленность.`
+  },
+  virgo: {
+    paragraphs: [
+      `Для Дев июль поднимает тему друзей, команды, аудитории, планов на будущее, соцсетей и окружения. В первой половине месяца могут возвращаться старые идеи, люди, проекты, коллективные истории или вопросы: с кем я и куда я вообще иду?`,
+      `До 23 июля не спешите резко обрывать связи или менять планы. Лучше посмотреть, какие мечты всё ещё живые, а какие вы тянете просто потому, что когда-то они казались важными.`,
+      `Новолуние 14 июля может показать старый сценарий в окружении: где вы удобны, где спасаете, где боитесь проявиться перед аудиторией, где ждёте поддержки не от тех людей.`,
+      `После 22–23 июля фокус уйдёт в более тихую зону: восстановление, закулисная работа, завершение хвостов, подготовка к новому личному циклу. Вам важно не разгоняться слишком резко, а дозировать нагрузку.`,
+      `Полнолуние 29–30 июля подсветит работу, режим, здоровье, обязанности и повседневную систему. Может стать ясно, какой график, нагрузку или привычку пора менять.`,
+    ],
+    advice: `пересмотрите не только планы, но и людей, с которыми вы собираетесь идти дальше.`
+  },
+  libra: {
+    paragraphs: [
+      `Для Весов июль поднимает тему карьеры, статуса, целей, ответственности, профессионального направления и видимости. В первой половине месяца может стать заметно, где старая стратегия уже не работает, где вы устали доказывать, где цели были не совсем ваши.`,
+      `До 23 июля не спешите бросать работу, резко менять направление или принимать важные карьерные решения на эмоциях. Лучше пересмотреть систему: что приносит результат, а что создаёт только видимость занятости?`,
+      `Новолуние 14 июля помогает честно спросить себя: я строю свою реализацию или пытаюсь соответствовать чужим ожиданиям?`,
+      `После 22–23 июля станет больше энергии для команды, аудитории, соцсетей, друзей, продвижения и будущих планов. Можно активнее выходить в люди, говорить о своих целях, собирать вокруг себя правильное окружение.`,
+      `Полнолуние 29–30 июля подсветит тему любви, творчества, детей, удовольствия и самовыражения. Где вы стали слишком правильными, но перестали быть живыми?`,
+    ],
+    advice: `стройте карьеру не из напряжения "надо доказать", а из ясного понимания, какую роль вы хотите занимать.`
+  },
+  scorpio: {
+    paragraphs: [
+      `Для Скорпионов июль поднимает тему обучения, путешествий, смыслов, документов, мировоззрения и расширения. В первой половине месяца могут возвращаться старые идеи, желание уехать, доучиться, сменить направление или посмотреть на жизнь шире.`,
+      `До 23 июля важно перепроверять документы, билеты, юридические моменты, договорённости с обучением и поездками. Не все планы сразу будут складываться идеально, но это не значит, что направление неверное — возможно, его нужно уточнить.`,
+      `Новолуние 14 июля помогает увидеть, какие убеждения вас ограничивают. Где вы говорите себе "мне нельзя", "уже поздно", "я не справлюсь", хотя внутри давно хотите большего?`,
+      `После 22–23 июля фокус перейдёт в карьеру, статус, проявленность и признание. Может появиться желание заявить о себе громче, выйти на новый уровень, показать экспертность.`,
+      `Полнолуние 29–30 июля подсветит дом, семью, внутреннюю опору и личную территорию. Может стать ясно, где внешние амбиции конфликтуют с внутренним состоянием.`,
+    ],
+    advice: `расширяйтесь, но не убегайте от базы — новый уровень должен опираться на внутреннюю устойчивость.`
+  },
+  sagittarius: {
+    paragraphs: [
+      `Для Стрельцов июль поднимает глубокие темы: общие деньги, кредиты, долги, налоги, вложения, близость, доверие, страхи, зависимости и контроль. Первая половина месяца может быть эмоционально насыщенной, потому что будут всплывать вопросы, которые обычно хочется отложить.`,
+      `До 23 июля не стоит принимать финансовые решения из тревоги, ревности, обиды или желания срочно всё закрыть. Лучше спокойно разобраться: где долги, где утечки, где зависимость, где вы слишком многое держите под контролем.`,
+      `Новолуние 14 июля помогает увидеть сценарий: где вы отдаёте свою силу страху, деньгам, партнёру, прошлому опыту или чужому влиянию.`,
+      `После 22–23 июля станет легче дышать. Фокус сместится в обучение, поездки, расширение, новые смыслы, путешествия, продвижение и планы на будущее.`,
+      `Полнолуние 29–30 июля подсветит тему общения, документов, переписок, родственников или важного разговора. Может стать ясно, что давно пора сказать, но без разрушения.`,
+    ],
+    advice: `не убегайте от сложных тем — разберите их спокойно, и после этого появится ощущение свободы.`
+  },
+  capricorn: {
+    paragraphs: [
+      `Для Козерогов июль поднимает тему отношений, партнёрств, клиентов, договорённостей, брака, сотрудничества и баланса "я — другой". В первой половине месяца могут возвращаться старые разговоры, бывшие люди, незавершённые вопросы или напряжение в текущих отношениях.`,
+      `До 23 июля важно не делать окончательных выводов на эмоциях. Ретро-Меркурий может искажать восприятие: где-то вы можете услышать не то, что имели в виду, а где-то сами сказать резче, чем хотели.`,
+      `Новолуние 14 июля помогает увидеть сценарий в отношениях: где вы молчите, терпите, контролируете, спасаете, доказываете или пытаетесь заслужить любовь.`,
+      `После 22–23 июля фокус станет глубже: общие деньги, доверие, близость, обязательства, долги, страхи, зависимость, финансовые договорённости. Здесь важно быть честными и взрослыми.`,
+      `Полнолуние 29–30 июля подсветит личные деньги, самоценность и доход. Может стать ясно, где вы недооцениваете себя или слишком зависите от чужой оценки.`,
+    ],
+    advice: `выбирайте честный диалог вместо накопленного раздражения и игры в "угадай, что я чувствую".`
+  },
+  aquarius: {
+    paragraphs: [
+      `Для Водолеев июль поднимает тему работы, режима, здоровья, обязанностей, привычек, графика и повседневной системы. В первой половине месяца может стать видно, где вы перегружены, где хаос съедает энергию, где тело уже просит не мотивации, а заботы и регулярности.`,
+      `До 23 июля не стоит резко менять всё в работе или здоровье из состояния раздражения. Лучше пересмотреть расписание, питание, сон, нагрузку, рабочие процессы, клиентский путь и бытовые обязанности.`,
+      `Новолуние 14 июля помогает увидеть повторяющийся сценарий: где вы обещаете себе режим, потом бросаете, потом вините себя и снова начинаете с жёсткого рывка.`,
+      `После 22–23 июля фокус перейдёт в отношения, партнёрства, клиентов и важные договорённости. Станет больше контактов, разговоров, запросов и ситуаций, где нужно учитывать не только себя.`,
+      `Полнолуние 29–30 июля в вашем знаке может стать сильной личной точкой. Может прийти осознание: где вы стали удобными, но перестали быть живыми? Где пора вернуть себе право быть собой?`,
+    ],
+    advice: `сначала настройте свою систему, а потом входите в отношения и партнёрства из устойчивости, а не из перегруза.`
+  },
+  pisces: {
+    paragraphs: [
+      `Для Рыб июль поднимает тему любви, творчества, детей, удовольствия, романтики, самовыражения и права радоваться. В первой половине месяца могут возвращаться старые чувства, бывшие симпатии, творческие идеи, вопросы детей или внутренний конфликт: "а можно ли мне хотеть, играть, проявляться?"`,
+      `До 23 июля не спешите делать выводы в любви и творчестве. Чувства могут быть сильными, но не всегда стабильными. Лучше наблюдать: что действительно живое, а что просто возвращает вас в старый эмоциональный сценарий.`,
+      `Новолуние 14 июля помогает увидеть, где вы отказываете себе в радости, ждёте разрешения, боитесь быть яркими или выбираете драму вместо живого чувства.`,
+      `После 22–23 июля фокус сместится в работу, режим, здоровье, обязанности и ежедневную систему. Появится потребность навести порядок, собраться, выстроить график, заняться телом и рабочими процессами.`,
+      `Полнолуние 29–30 июля подсветит скрытые эмоции, усталость, подсознательные страхи и то, что вы долго не хотели замечать. Эти дни лучше пройти мягко, без резких решений.`,
+    ],
+    advice: `возвращайте себе радость, но не забывайте превращать вдохновение в понятные действия.`
+  },
+};
+
+let currentSign = null;
+
+// Build sign buttons
+const grid = document.getElementById('signsGrid');
+signs.forEach(s => {
+  const btn = document.createElement('button');
+  btn.className = 'sign-btn';
+  btn.dataset.id = s.id;
+  btn.innerHTML = `<span class="sign-sym">${s.symbol}</span><span class="sign-nm">${s.name}</span>`;
+  btn.onclick = () => selectSign(s);
+  grid.appendChild(btn);
+});
+
+function selectSign(s) {
+  currentSign = s.id;
+  document.querySelectorAll('.sign-btn').forEach(b => b.classList.toggle('active', b.dataset.id === s.id));
+  renderForecast();
+}
+
+function renderForecast() {
+  const area = document.getElementById('forecastArea');
+  const sign = signs.find(s => s.id === currentSign);
+  area.innerHTML = `
+    <div class="forecast visible">
+      <div class="forecast-head">
+        <div class="forecast-sym">${sign.symbol}</div>
+        <div class="forecast-meta">
+          <h2>${sign.name}</h2>
+          <p>${sign.dates} &nbsp;·&nbsp; Экспресс-прогноз на ${FORECAST_MONTH} ${FORECAST_YEAR}</p>
+        </div>
+      </div>
+      ${renderSign(currentSign)}
+      ${renderCTA(sign)}
+    </div>
+  `;
+}
+
+function renderSign(signId) {
+  const d = data[signId];
+  const paragraphsHtml = d.paragraphs.map(p => `<div class="section-txt">${p}</div>`).join('');
+  return `
+    <div class="section">
+      ${paragraphsHtml}
+    </div>
+    <div class="advice">
+      <span class="advice-lbl">Совет месяца</span>
+      <div class="advice-txt">${d.advice}</div>
+    </div>
+  `;
+}
+
+function renderCTA(sign) {
+  const prefillText = `Привет! Я узнала свой прогноз по знаку ${sign.name} на ${FORECAST_MONTH} ${FORECAST_YEAR}, хочу разобраться подробнее`;
+  const vkLink = `https://vk.com/im?sel=-224753072&text=${encodeURIComponent(prefillText)}`;
+  return `
+    <div class="cta">
+      <h3>Общий прогноз — это только фон месяца</h3>
+      <p>Он не учитывает твою личную карту, поэтому одна и та же тема у разных людей проявляется по-разному: в деньгах, отношениях, работе или внутреннем состоянии.<br><br>В сообщениях помогу понять, какой формат прогноза подойдёт именно тебе.</p>
+      <div class="cta-btns">
+        <a class="cta-btn" href="${vkLink}" target="_blank" rel="noopener">
+          Получить продолжение
+        </a>
+      </div>
+    </div>
+  `;
+}
+</script>
+</body>
+</html>
